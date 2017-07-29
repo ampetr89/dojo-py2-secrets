@@ -1,0 +1,27 @@
+{% extends 'sec/default.html' %}
+
+
+{% block css %}
+    {% load staticfiles %}
+    <!-- bootstrap to the rescue -->
+    <link rel="stylesheet" href="{% static 'sec/grid.css'%}">
+    <link rel="stylesheet" href="{% static 'sec/style.css'%}">
+{% endblock %}
+
+{% block jquery %}
+    <source src="{% static 'sec/like.js' %}" type="text/javascript">
+{% endblock %}
+
+{% block title %}Trending Secrets{% endblock %}
+
+{% block heading %}Most Popular Secrets{% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <h3>Most Popular Secrets</h3>
+    <!-- list secrets -->
+    {% include 'sec/list.html' %}
+</div>
+
+{% endblock %}

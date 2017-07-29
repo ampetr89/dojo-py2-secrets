@@ -1,0 +1,33 @@
+{% extends "logreg/default.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block formtitle %}Sign Up for an Account{% endblock %}
+
+
+{% block form%}
+<form action="{% url 'logreg:process' 'registration' %}" method="POST">
+    {% csrf_token %}
+    <label for="first_name">First Name</label>
+    <input type="text" name="first_name">
+
+    <label for="last_name">Last Name</label>
+    <input type="text" name="last_name">
+
+    <label for="email">Email</label>
+    <input type="text" name="email">
+
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    <label for="password2">Confirm Password</label>
+    <input type="password" name="password2">
+
+
+    <p><input type="submit" class="btn btn-lg btn-success" value="Register"></p>
+    
+</form>
+{% endblock %}
+
+{% block formcomment %}
+    Already have an account? <a href="{% url 'logreg:login' %}">Log in here</a>.
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "logreg/default.html" %}
+
+{% block title %}Log In{% endblock %}
+
+{% block formtitle %}Hello! Please log in.{% endblock %}
+
+
+{% block form %}
+
+<form action="{% url 'logreg:process' 'login' %}" method="POST">
+    {% csrf_token %}
+    <label for="email">Email</label>
+    <input type="text" name="email">
+
+    <label for="password">Password</label>
+    <input type="password" name="password">
+
+    <p><input type="submit" class="btn btn-lg btn-success" value="Sign In"></p>
+</form>
+{% endblock %}
+
+{% block formcomment %}
+    Don't have an account? <a href="{% url 'logreg:register' %}">Register here</a>.
+{% endblock %}

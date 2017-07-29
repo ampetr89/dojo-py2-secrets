@@ -1,0 +1,96 @@
+{% extends "dash/default.html" %}
+
+{% block title %}Edit User{% endblock %}
+
+
+<!-- Bootstrap theme CSS -->
+{% block css %}
+    {% load staticfiles %}
+    <link href="{% static 'users/css/jumbotron.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block sidebar %}
+    <!-- override sidebar -->
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+        <h1>{{user}}</h1>
+        <p>
+            {% if profile %}
+                <form action="{% url 'users:edit' user.id  %}" method="POST">
+                    {% csrf_token %}
+                    <textarea name="description" class="edit" type="text" cols=50>{{user.description}}</textarea><br>
+                    <input type="submit" value="Update Description" class="btn btn-default">
+                </form>
+            {% else %}
+                {{user.description}}
+            {% endif %}
+
+        </p>
+        
+        <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>-->
+        </div>
+    </div>
+    
+
+    <!--<div class="container">
+        <p>User ID #{{user.id}}</p>
+        <p>Joined on {{user.created_at}}</p>
+        <p>Email address: {{user.email}}</p>
+    </div>-->
+
+    <div class="container">
+        <div class="row placeholders">
+            {% for message in messages %}
+                <p class="alert alert-{{message.tags}} alert-dismissible"> {{message}}</p>
+                <!-- dismissible feature not working, I think requires another library -->
+            {% endfor %}
+        </div>
+
+        
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-6">
+            <h2>Edit Personal Info</h2>
+            <form action="{% url 'users:edit' user.id %}" method="POST">
+            {% csrf_token %}
+            <p>First Name</p>
+            <p><input type="text" name="first_name" value="{{user.first_name}}"></p>
+
+            <p>Last Name</p>
+            <p><input type="text" name="last_name" value="{{user.last_name}}"></p>
+
+            <p>Email</p>
+            <p><input type="text" name="email" value="{{user.email}}"></p>
+            
+            {% if is_admin %}
+            <p>Change admin status:
+                <input type="radio" name="is_admin" value="1" {% if user.is_admin %}checked{% endif %}> Admin &nbsp;
+                <input type="radio" name="is_admin" value="0" {% if not user.is_admin %}checked{% endif %}> Normal User
+                <!--<input type="checkbox" name="is_admin" value="True" >-->
+            </p>
+            {% endif %}
+
+            <p><input type="submit" value="Update Info" class="btn btn-default"></p>
+        </form>
+        </div>
+
+        <div class="col-md-5">
+            <h2>Edit Password</h2>
+            <form action="{% url 'users:edit' user.id %}" method="POST">
+                {% csrf_token %}
+                <p>Password</p>
+                <p><input type="password" name="password"></p>
+                <p>Confirm Password</p>
+                <p><input type="password" name="password2"></p>
+            
+                <p><input type="submit" value="Update Password" class="btn btn-default"></p>
+            </form>
+        </div>
+
+    
+   
+{% endblock %}

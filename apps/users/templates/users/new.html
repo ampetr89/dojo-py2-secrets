@@ -1,0 +1,39 @@
+{% extends "logreg/default.html" %}
+
+{% block title %}New User{% endblock %}
+
+{% block formtitle %}Enter new user information{% endblock %}
+
+
+{% block header %}
+
+    {% include 'dash/header.html' %}
+
+{% endblock %}
+
+
+{% block form %}
+    <form action="{% url 'logreg:process' 'create' %}" method="POST">
+        {% csrf_token %}
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name">
+
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name">
+
+        <label for="email">Email</label>
+        <input type="text" name="email">
+
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <label for="password2">Confirm Password</label>
+        <input type="password" name="password2">
+
+        <label for="is_admin">Make admin?</label>
+        <input type="radio" name="is_admin" value="1"> Yes &nbsp;
+        <input type="radio" name="is_admin" value="0"> No
+
+        <input type="submit" value="Create User" class="btn btn-lg btn-success">
+    </form>
+
+{% endblock %}

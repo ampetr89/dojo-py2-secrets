@@ -1,0 +1,19 @@
+
+    {% load humanize %}
+    <div class="container">
+        {% for secret in secrets %}
+            <div class="row">
+                <div class="col-md-8 secret">
+                    <h4>{{secret.content}}</h4>
+                    <p>{{secret.created_at|naturaltime}}</p>
+                </div>
+                <div class="col-md-2 secretControls" secid={{secret.id}}>
+                    <p><span class="n_likes">{{secret.n_likes}}</span> <span class="likeword">Likes</span></p>
+                    <p><a href="#"><i class="fa fa-thumbs-o-up like" aria-hidden="true"></i></a></p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No secrets here yet..</p>
+        {% endfor %}
+    </div>
+</div> 

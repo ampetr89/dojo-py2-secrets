@@ -1,0 +1,34 @@
+{% extends 'sec/default.html' %}
+
+{% block css %}
+    {% load staticfiles %}
+    <!-- bootstrap to the rescue -->
+    <link rel="stylesheet" href="{% static 'sec/grid.css'%}">
+    <link rel="stylesheet" href="{% static 'sec/style.css'%}">
+{% endblock %}
+
+{% block jquery %}
+    <source src="{% static 'sec/like.js' %}" type="text/javascript">
+{% endblock %}
+
+{% block title %}Recent Secrets{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h2>Post a Secret...</h2>
+        <form action="{% url 'users:add_message' %}" method="POST">
+            {% csrf_token %}
+            <textarea rows="6" cols="75" name="content" placeholder="Write a secret here"></textarea>
+            <p><input type="submit" value="Post" class="btn btn-primary"></p>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <h3>Recent Secrets</h3>
+    <!-- list secrets -->
+    {% include 'sec/list.html' %}
+</div>
+{% endblock %}
